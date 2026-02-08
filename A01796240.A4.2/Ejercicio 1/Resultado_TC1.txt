@@ -1,0 +1,7 @@
+ARCHIVO: TC1.txt
+Media: 242.3200
+Mediana: 239.5000
+Moda: 393.0000
+Varianza: 21099.9176
+Desviación Estándar: 145.2581
+Tiempo: 0.012528 s

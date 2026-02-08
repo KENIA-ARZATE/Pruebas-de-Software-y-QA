@@ -1,0 +1,7 @@
+ARCHIVO: TC3.txt
+Media: 249.7762
+Mediana: 249.0000
+Moda: 94.0000
+Varianza: 21117.2775
+Desviación Estándar: 145.3178
+Tiempo: 14.426949 s

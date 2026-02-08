@@ -1,0 +1,7 @@
+ARCHIVO: TC5.txt
+Media: 241.4951
+Mediana: 241.0000
+Moda: 393.0000
+Varianza: 21160.0220
+Desviación Estándar: 145.4648
+Tiempo: 0.003935 s
