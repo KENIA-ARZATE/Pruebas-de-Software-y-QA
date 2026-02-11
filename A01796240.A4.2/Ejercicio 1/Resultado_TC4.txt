@@ -1,0 +1,7 @@
+ARCHIVO: TC4.txt
+Media: 149.0027
+Mediana: 147.7500
+Moda: 123.7500
+Varianza: 17007.9208
+Desviación Estándar: 130.4144
+Tiempo: 10.741377 s
