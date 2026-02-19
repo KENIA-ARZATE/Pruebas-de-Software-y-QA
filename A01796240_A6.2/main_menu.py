@@ -26,9 +26,26 @@ def menu_hoteles(hotel_manager):
             h_id = input("ID del hotel a eliminar: ")
             hotel_manager.delete_hotel(h_id)
         elif op == "3":
+            reservas = res_manager.display_reservations()
             hoteles = hotel_manager.display_hotels()
-            for h in hoteles:
-                print(f"ID: {h['id']} | Nombre: {h['name']} | Hab: {h['rooms']}")
+            clientes = cust_manager.display_customers()
+            
+            print("\n" + "="*70)
+            print(f"{'ID Res.':<10} | {'Cliente':<20} | {'Hotel':<20}")
+            print("-" * 70)
+            
+            for r in reservas:
+                # nombre del cliente usando el ID guardado
+                cliente_obj = next((c for c in clientes if str(c['id']) == str(r['customer_id'])), None)
+                nombre_cliente = cliente_obj['name'] if cliente_obj else "Desconocido"
+                
+                # nombre del hotel usando el ID guardado
+                hotel_obj = next((h for h in hoteles if str(h['id']) == str(r['hotel_id'])), None)
+                nombre_hotel = hotel_obj['name'] if hotel_obj else "Desconocido"
+                
+                print(f"{r['res_id']:<10} | {nombre_cliente:<20} | {nombre_hotel:<20}")
+            print("="*70)
+
         elif op == "4":
             h_id = input("ID del hotel a modificar: ")
             nom = input("Nuevo nombre (vacío para omitir): ")
