@@ -3,6 +3,7 @@ Menu principal que integra las clases.
 """
 from Hotels import Hotel
 from customer import Customer
+from reservation import Reservation
 
 def menu_hoteles(hotel_manager):
     """Interfaz para administrar hoteles."""
@@ -68,17 +69,51 @@ def menu_clientes(cust_manager):
         elif op == "5":
             break
 
+def menu_reservaciones(res_manager, hotel_manager, cust_manager):
+    """Interfaz para gestionar reservaciones vinculando IDs."""
+    while True:
+        print("\n--- GESTIÓN DE RESERVACIONES ---")
+        print("1. Crear Reservación")
+        print("2. Cancelar Reservación")
+        print("3. Mostrar Reservaciones")
+        print("4. Regresar")
+        op = input("Seleccione una opción: ")
+
+        if op == "1":
+            r_id = input("ID Reservación: ")
+            c_id = input("ID Cliente: ")
+            h_id = input("ID Hotel: ")
+            # Se pasan las listas actuales para validar existencia (Req 5)
+            res_manager.create_reservation(
+                r_id, c_id, h_id,
+                cust_manager.display_customers(),
+                hotel_manager.display_hotels()
+            )
+        elif op == "2":
+            r_id = input("ID de reservación a cancelar: ")
+            res_manager.cancel_reservation(r_id)
+        elif op == "3":
+            reservas = res_manager.display_reservations()
+            print("\nID Res. | ID Cliente | ID Hotel")
+            for r in reservas:
+                print(f"{r['res_id']} | {r['customer_id']} | {r['hotel_id']}")
+        elif op == "4":
+            break
+
+
 def main():
-    """Punto de entrada principal."""
+    """Punto de entrada principal del sistema."""
     hotel_api = Hotel()
     customer_api = Customer()
+    reservation_api = Reservation()
 
     while True:
-        print("\n=== SISTEMA DE RESERVACIONES TEC ===")
+        print("\n=== SISTEMA DE RESERVACIONES HOTELES TEC ===")
         print("1. Administrar Hoteles")
         print("2. Administrar Clientes")
-        print("3. Salir")
-        
+        print("3. Administrar Reservaciones")
+        print("4. Salir")
+
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
@@ -86,8 +121,12 @@ def main():
         elif opcion == "2":
             menu_clientes(customer_api)
         elif opcion == "3":
+            menu_reservaciones(reservation_api, hotel_api, customer_api)
+        elif opcion == "4":
             print("Saliendo del sistema...")
             break
+        else:
+            print("Opción no válida.")
 
 if __name__ == "__main__":
     main()
