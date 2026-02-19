@@ -19,6 +19,7 @@ class Reservation:
             with open(self.file_path, 'w', encoding='utf-8') as f:
                 json.dump([], f)
 
+    # pylint: disable=too-many-arguments, too-many-positional-arguments
     def create_reservation(self, res_id, customer_id, hotel_id,
                            customers, hotels):
         """
@@ -36,7 +37,7 @@ class Reservation:
             return
 
         reservations = self.display_reservations()
-        
+
         # Validacion: ¿ID de reserva duplicado? (Caso Negativo)
         if any(str(r['res_id']) == str(res_id) for r in reservations):
             print(f"Error: El ID de reservacion {res_id} ya existe.")
@@ -54,11 +55,10 @@ class Reservation:
         """Elimina una reservacion del archivo JSON."""
         reservations = self.display_reservations()
         updated = [r for r in reservations if str(r['res_id']) != str(res_id)]
-        
+
         if len(updated) == len(reservations):
             print(f"Error: Reservacion {res_id} no encontrada.")
             return
-        
         self._save_to_file(updated)
         print(f"Reservacion {res_id} cancelada.")
 
