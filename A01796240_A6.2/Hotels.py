@@ -3,7 +3,8 @@ import os
 
 class Hotel:
     def __init__(self, file_path="hotels.json"):
-        self.file_path = file_path
+        base_path = os.path.dirname(__file__)
+        self.file_path = os.path.join(base_path, file_path)
         self._ensure_file_exists()
 
     def _ensure_file_exists(self):
@@ -39,7 +40,46 @@ class Hotel:
 
     def _save_to_file(self, data):
         with open(self.file_path, 'w') as f:
-            json.dump(data, f, indent=4)    
+            json.dump(data, f, indent=4)   
+
+    def delete_hotel(self, hotel_id):
+        """Elimina un hotel por su ID."""
+        hotels = self.display_hotels()
+        # Buscamos si el hotel existe
+        updated_hotels = [h for h in hotels if h['id'] != hotel_id]
+        
+        if len(updated_hotels) == len(hotels):
+            print(f"Error: Hotel con ID {hotel_id} no encontrado.")
+            return
+        
+        self._save_to_file(updated_hotels)
+        print(f"Hotel {hotel_id} eliminado exitosamente.")
+
+    def modify_hotel(self, hotel_id, name=None, location=None, rooms=None):
+        """Modificará la información de un hotel existente."""
+        hotels = self.display_hotels()
+        found = False
+        
+        for hotel in hotels:
+            if hotel['id'] == hotel_id:
+                if name:
+                    hotel['name'] = name
+                if location:
+                    hotel['location'] = location
+                if rooms is not None:
+                    try:
+                        hotel['rooms'] = int(rooms)
+                    except ValueError:
+                        print("Error: El número de habitaciones debe ser un entero.")
+                        return
+                found = True
+                break
+        
+        if not found:
+            print(f"Error: No se pudo modificar. ID {hotel_id} no existe.")
+        else:
+            self._save_to_file(hotels)
+            print(f"Información del hotel {hotel_id} actualizada.")         
     pass
 
 def main():
@@ -51,7 +91,8 @@ def main():
         print("1. Crear Hotel")
         print("2. Eliminar Hotel")
         print("3. Mostrar Hoteles")
-        print("4. Salir")
+        print("4. Modificar Hotel")
+        print("5. Salir")
         
         opcion = input("Selecciona una opción: ")
         
@@ -61,16 +102,29 @@ def main():
             ubicacion = input("Ubicación: ")
             habitaciones = input("Número de habitaciones: ")
             sistema.create_hotel(h_id, nombre, ubicacion, habitaciones)
-        
+            print("¡Archivo actualizado!")
+
         elif opcion == "2":
             h_id = input("ID del hotel a eliminar: ")
             sistema.delete_hotel(h_id)
             
         elif opcion == "3":
-            # (Lógica para mostrar hoteles que vimos antes)
-            pass
+            hotels = sistema.display_hotels()
+            if not hotels:
+                print("No hay hoteles registrados.")
+            else:
+                print("\n--- HOTELES REGISTRADOS ---")
+                for hotel in hotels:
+                    print(f"ID: {hotel['id']}, Nombre: {hotel['name']}, Ubicación: {hotel['location']}, Habitaciones: {hotel['rooms']}")
             
         elif opcion == "4":
+            h_id = input("ID del hotel a modificar: ")
+            nombre = input("Nuevo nombre (dejar en blanco para no modificar): ")
+            ubicacion = input("Nueva ubicación (dejar en blanco para no modificar): ")
+            habitaciones = input("Nuevo número de habitaciones (dejar en blanco para no modificar): ")
+            sistema.modify_hotel(h_id, name=nombre if nombre else None, location=ubicacion if ubicacion else None, rooms=habitaciones if habitaciones else None)
+            
+        elif opcion == "5":
             print("Saliendo del sistema...")
             break
         else:
