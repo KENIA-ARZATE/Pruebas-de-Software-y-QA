@@ -60,8 +60,10 @@ class Hotel:
         hotels = self.display_hotels()
         found = False
         
+        hotel_id = str(hotel_id)
+
         for hotel in hotels:
-            if hotel['id'] == hotel_id:
+            if str(hotel['id']) == hotel_id:
                 if name:
                     hotel['name'] = name
                 if location:

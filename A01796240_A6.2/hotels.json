@@ -3,6 +3,18 @@
         "id": 1,
         "name": "Hotel Alameda",
         "location": "Toluca",
-        "rooms": 10
+        "rooms": 21
+    },
+    {
+        "id": "2",
+        "name": "Venados",
+        "location": "Toluca",
+        "rooms": 12
+    },
+    {
+        "id": "3",
+        "name": "Picasso",
+        "location": "Toluca",
+        "rooms": 13
     }
 ]
