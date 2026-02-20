@@ -20,6 +20,7 @@ class Reservation:
                 json.dump([], f)
 
     # pylint: disable=too-many-arguments, too-many-positional-arguments
+
     def create_reservation(self, res_id, customer_id, hotel_id,
                            customers, hotels):
         """
