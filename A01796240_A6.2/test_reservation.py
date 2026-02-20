@@ -3,6 +3,7 @@ import unittest
 import os
 from reservation import Reservation
 
+
 class TestReservation(unittest.TestCase):
     """Casos de prueba para la clase."""
     def setUp(self):
@@ -11,9 +12,20 @@ class TestReservation(unittest.TestCase):
         self.res_sys = Reservation(self.test_file)
         # Datos de ejemplo para las validaciones
         self.mock_customers = [
-            {"id": "C1", "name": "Klag", "email": "k@mail.com"}]
+            {
+                "id": "C1",
+                "name": "Klag",
+                "email": "k@mail.com"
+            }
+        ]
         self.mock_hotels = [
-            {"id": "H1", "name": "Tec Hotel", "location": "Toluca", "rooms": 10}]
+            {
+                "id": "H1",
+                "name": "Tec Hotel",
+                "location": "Toluca",
+                "rooms": 10
+            }
+        ]
 
     def tearDown(self):
         """Limpieza después de cada prueba."""

@@ -3,6 +3,7 @@ import unittest
 import os
 from hotels import Hotel
 
+
 class TestHotel(unittest.TestCase):
     """Casos de prueba para la clase."""
     def setUp(self):

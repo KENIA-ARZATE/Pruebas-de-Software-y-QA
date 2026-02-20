@@ -29,10 +29,14 @@ def menu_hoteles(hotel_manager):
         elif op == "3":
             hoteles = hotel_manager.display_hotels()
             print("\n--- LISTADO DE HOTELES ---")
-            print(f"{'ID':<10} | {'Nombre':<20} | {'Ubicación':<20} | {'Habitaciones':<10}")
+            header = (f"{'ID':<10} | {'Nombre':<20} | "
+                      f"{'Ubicación':<20} | {'Habitaciones':<10}")
+            print(header)
             print("-" * 70)
             for h in hoteles:
-                print(f"{h['id']:<10} | {h['name']:<20} | {h['location']:<20} | {h['rooms']:<10}")
+                row = (f"{h['id']:<10} | {h['name']:<20} | "
+                       f"{h['location']:<20} | {h['rooms']:<10}")
+                print(row)
         elif op == "4":
             h_id = input("ID del hotel a modificar: ")
             nom = input("Nuevo nombre (vacío para omitir): ")

@@ -5,6 +5,7 @@ Modulo para la gestion de Hoteles.
 import json
 import os
 
+
 class Hotel:
     """Clase que maneja la logica y persistencia de Hoteles."""
     def __init__(self, file_path="hotels.json"):
@@ -80,7 +81,8 @@ class Hotel:
                     try:
                         hotel['rooms'] = int(rooms)
                     except ValueError:
-                        print("Error: El número de habitaciones debe ser un entero.")
+                        print("Error: El número de habitaciones "
+                              "debe ser un entero.")
                         return
                 found = True
                 break
