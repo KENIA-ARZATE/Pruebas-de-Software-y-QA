@@ -16,5 +16,11 @@
         "name": "Picasso",
         "location": "Toluca",
         "rooms": 24
+    },
+    {
+        "id": "4",
+        "name": "Muralla",
+        "location": "Queretaro",
+        "rooms": 21
     }
 ]

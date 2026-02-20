@@ -8,10 +8,5 @@
         "res_id": "2",
         "customer_id": "2",
         "hotel_id": "1"
-    },
-    {
-        "res_id": "3",
-        "customer_id": "1",
-        "hotel_id": "3"
     }
 ]
