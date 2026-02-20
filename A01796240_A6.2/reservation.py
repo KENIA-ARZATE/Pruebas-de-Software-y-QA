@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code
 """
 Modulo para la gestion de reservaciones.
 """

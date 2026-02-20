@@ -1,11 +1,14 @@
+# pylint: disable=duplicate-code
 """
 Modulo para la gestion de clientes.
 """
 import json
 import os
 
+
 class Customer:
     """Clase para manejar la persistencia y logica de clientes."""
+
     def __init__(self, file_name="customers.json"):
         base_path = os.path.dirname(__file__)
         self.file_path = os.path.join(base_path, file_name)
@@ -24,8 +27,9 @@ class Customer:
         if any(str(c['id']) == str(customer_id) for c in customers):
             print(f"Error: El ID {customer_id} ya existe.")
             return
-        
-        customers.append({"id": str(customer_id), "name": name, "email": email})
+
+        customers.append(
+            {"id": str(customer_id), "name": name, "email": email})
         self._save_to_file(customers)
         print(f"Cliente {name} creado.")
 
@@ -33,11 +37,11 @@ class Customer:
         """Elimina un cliente por su ID."""
         customers = self.display_customers()
         updated = [c for c in customers if str(c['id']) != str(customer_id)]
-        
+
         if len(updated) == len(customers):
             print(f"Error: Cliente {customer_id} no encontrado.")
             return
-        
+
         self._save_to_file(updated)
         print(f"Cliente {customer_id} eliminado.")
 
@@ -53,7 +57,7 @@ class Customer:
                     customer['email'] = email
                 found = True
                 break
-        
+
         if not found:
             print(f"Error: Cliente {customer_id} no existe.")
         else:

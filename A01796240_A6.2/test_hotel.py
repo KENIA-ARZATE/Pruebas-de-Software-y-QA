@@ -1,8 +1,10 @@
+"""Modulo de pruebas unitarias."""
 import unittest
 import os
-from Hotels import Hotel
+from hotels import Hotel
 
 class TestHotel(unittest.TestCase):
+    """Casos de prueba para la clase."""
     def setUp(self):
         self.test_file = "test_hotels_db.json"
         self.hotel_sys = Hotel(self.test_file)
@@ -25,7 +27,8 @@ class TestHotel(unittest.TestCase):
     def test_modify_hotel_full(self):
         """Prueba modificar nombre, ubicación y habitaciones."""
         self.hotel_sys.create_hotel("H1", "Original", "CDMX", 5)
-        self.hotel_sys.modify_hotel("H1", name="Nuevo", location="Cancun", rooms=20)
+        self.hotel_sys.modify_hotel(
+            "H1", name="Nuevo", location="Cancun", rooms=20)
         h = self.hotel_sys.display_hotels()[0]
         self.assertEqual(h['name'], "Nuevo")
         self.assertEqual(h['location'], "Cancun")
@@ -46,6 +49,7 @@ class TestHotel(unittest.TestCase):
         """Caso Negativo: Eliminar hotel que no existe."""
         self.hotel_sys.delete_hotel("999")
         self.assertEqual(len(self.hotel_sys.display_hotels()), 0)
+
 
 if __name__ == '__main__':
     unittest.main()

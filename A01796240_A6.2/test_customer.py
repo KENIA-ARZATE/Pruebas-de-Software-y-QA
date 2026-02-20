@@ -3,7 +3,6 @@ Pruebas unitarias para la clase Customer.
 """
 import unittest
 import os
-import json
 from customer import Customer
 
 
